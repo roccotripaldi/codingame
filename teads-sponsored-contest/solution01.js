@@ -1,5 +1,3 @@
-// This solution works, but it is not optimized. Tests 8 and 9 will time out.
-
 var n = parseInt(readline()); // the number of adjacency relations
 var Graph = {};
 var depth = 0;
@@ -48,5 +46,6 @@ do {
 } while( Object.keys( Graph ).length > 0 );
 
 print( Math.max( depth, 2 ) );
+
 
 
