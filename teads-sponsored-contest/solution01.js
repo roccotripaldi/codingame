@@ -1,3 +1,5 @@
+// This solution works, but it is not optimized. Tests 8 and 9 will time out.
+
 var n = parseInt(readline()); // the number of adjacency relations
 var Graph = {};
 var depth = 0;
