@@ -1,6 +1,5 @@
 var n = parseInt(readline()); // the number of adjacency relations
-
-var Graph = [];
+var Graph = {};
 var depth = 0;
 
 for (var i = 0; i < n; i++) {
@@ -17,12 +16,9 @@ for (var i = 0; i < n; i++) {
     Graph[yi].push(xi);
 }
 
-
-function removeNode( n ) {
-    for( var key in Graph ) {
-        if ( Graph[key].indexOf( n ) > -1 ) {
-            Graph[key].splice( Graph[key].indexOf( n ), 1 );
-        }
+function removeNode( key, neighbor ) {
+    if( typeof Graph[ neighbor ] != 'undefined' ) {
+        Graph[ neighbor ] = Graph[ neighbor ].filter( function( value ) { return value != key } );
     }
 }
 
@@ -32,18 +28,16 @@ function graphDecay() {
         if ( Graph[key].length > 1 ) {
             continue;
         }
-        delete Graph[key];
-        if ( deleteKeys.indexOf( key ) === -1 ) {
-            deleteKeys.push( key );
-        }
+        deleteKeys[ key ] = Graph[ key ][ 0 ];
+        delete Graph[ key ];
+    }
+    
+    for( var d in deleteKeys ) {
+        removeNode( d, deleteKeys[d] );
     }
     
     if ( Object.keys( Graph ).length > 0 ) {
         depth++;
-    }
-    
-     for ( var n = 0; n < deleteKeys.length; n++ ) {
-        removeNode( parseInt( deleteKeys[n] ) );
     }
 }
 
@@ -51,5 +45,6 @@ do {
     graphDecay();
 } while( Object.keys( Graph ).length > 0 );
 
-
 print( Math.max( depth, 2 ) );
+
+
