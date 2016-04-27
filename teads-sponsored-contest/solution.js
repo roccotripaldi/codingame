@@ -46,6 +46,3 @@ do {
 } while( Object.keys( Graph ).length > 0 );
 
 print( Math.max( depth, 2 ) );
-
-
-
